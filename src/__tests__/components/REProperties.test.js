@@ -15,7 +15,7 @@ describe('>>>REProperties Initial rendered testing', () => {
     });
 
     it('REProperties renders without crashing', () => {
-        const div = document.createElement('div')//?
+        const div = document.createElement('div')
         ReactDOM.render(<REProperties {...props} />, div)
         ReactDOM.unmountComponentAtNode(div)
     });
