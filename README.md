@@ -11,4 +11,6 @@ add file setupTests.js
 src/components/REProperties.js
 __tests__/components/REProperties.test.js
 
+APP component  test for REProperties 
+
 

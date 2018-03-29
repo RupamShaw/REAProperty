@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-           <h1 className="App-title">Welcome to React</h1>
+           <h1 className="App-title">Welcome to REA World  via React</h1>
         </header>
         <REProperties results={data.results} saved ={data.saved}/>
       </div>
