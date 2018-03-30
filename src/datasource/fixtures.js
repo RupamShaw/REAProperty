@@ -165,3 +165,15 @@ export const addCard = {
     "id": "3",
     "mainImage": "http://i4.au.reastatic.net/640x480/98cee1b2a3a64329921fc38f7e2926a78d41fcc683fc48fb8a8ef2999b14c027/main.jpg"
 }
+
+export const falsedata = {
+    "price": "$726,500",
+    "agency": {
+        "brandingColors": {
+            "primary": "#ffe512"
+        },
+        "logo": "http://i1.au.reastatic.net/agencylogo/XRWXMT/12/20120927204448.gif"
+    },
+    "id": "6",
+    "mainImage": "http://i2.au.reastatic.net/640x480/20bfc8668a30e8cabf045a1cd54814a9042fc715a8be683ba196898333d68cec/main.jpg"
+}

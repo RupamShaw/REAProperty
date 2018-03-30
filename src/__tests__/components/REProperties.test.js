@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ConnectedProperties,{ REProperties }  from '../../components/REProperties';
+import configureStore from 'redux-mock-store'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux' 
+import rootReducer from '../../reducers'
 import { shallow, mount } from 'enzyme';
+
 import { data } from '../../datasource/fixtures.js'
+import ConnectedProperties,{ REProperties }  from '../../components/REProperties';
 
 const results = data.results
 const saved = data.saved
@@ -42,4 +47,23 @@ describe('>>>REProperties Initial rendered testing', () => {
         done()
     })
 })
-    
+
+describe('>>>REProperties --- REACT-REDUX (Mount + wrapping in <Provider>)', () => {
+    const initialState = { results, saved }
+    const mockStore = configureStore()
+    let store, wrapper
+    beforeEach(() => {
+        store = mockStore(initialState)
+        wrapper = mount(<Provider store={store}><ConnectedProperties /></Provider>)
+    })
+
+    it(' render the connected(SMART) component', () => {
+        expect(wrapper.find(ConnectedProperties).length).toEqual(1)
+    });
+
+    it(' check Prop matches with initialState', (done) => {
+        expect(wrapper.find(REProperties).prop('results')).toEqual(initialState.results)
+        done()
+    })
+
+})
