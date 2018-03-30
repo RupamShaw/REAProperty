@@ -19,5 +19,23 @@ describe('>>>REProperties Initial rendered testing', () => {
         ReactDOM.render(<REProperties {...props} />, div)
         ReactDOM.unmountComponentAtNode(div)
     });
+    
+    it("if zero  result  i.e count of REProperty tag is zero", (done) => {
+        let propszero = {results:[],saved:[]}
+        let wrapperPropResult = shallow(<REProperties {...propszero} />)
+        // REProperty tag zero"
+        expect(wrapperPropResult.find('AdminContact').length).toEqual(1)
+        done()
+    })
+
+    it("count of REProperty tag is equal to count of data.results+data.saved", (done) => {
+        // REProperty tag totalcount is data.results+data.saved"
+        expect(wrapper.find('REProperty').length).toEqual(results.length + saved.length)
+        //render REProperty tag for resultsa
+        expect(wrapper.find('#results REProperty').length).toEqual(results.length)
+        //render REProperty tag for saved
+        expect(wrapper.find('#saved REProperty').length).toEqual(saved.length)
+        done()
+    })
 })
     

@@ -1,0 +1,20 @@
+.propertyCardStyles {
+    border: solid;
+    border-radius: 5px;
+    max-width: 20%;
+    min-width: 150px;
+    flex: 1;
+    margin: 5px;
+}
+
+.card-backgroundColor-header {
+    text-align: left;
+    border-bottom: solid;
+}
+
+.card-logo {
+    width: 70px;
+    height: 30px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
