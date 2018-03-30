@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import REProperty from './REProperty'
+import '../styles/REProperties.css'
+
 const AdminContact = () =>{
     return(
         <div id="resultzero" >Contact Admin</div>
