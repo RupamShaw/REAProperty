@@ -4,7 +4,25 @@ import '../styles/REProperty.css'
 
 const REProperty = (props) => {
     var cardProperty = props.cardProperty 
+    var addREProperty = props.addREProperty 
     
+     //dynamic style for button 
+     var Button = ''
+     var selectedPropertyColor = ''
+     var backgroundColor = ''
+ 
+     if (addREProperty) {
+         Button = 'Add Property'
+         selectedPropertyColor = 'green'
+         backgroundColor = 'lightgreen'
+     }
+
+     const ButtonAStyle = {
+        color: selectedPropertyColor,
+        border: 'solid 2px ' + selectedPropertyColor,
+        backgroundColor: backgroundColor
+    }
+
     //dynamic style for each card of REPropertyData image headerbackgroundcolor and price 
     const HeaderBackgroundColorStyle = {
         backgroundColor: cardProperty.agency.brandingColors.primary
@@ -20,12 +38,36 @@ const REProperty = (props) => {
         backgroundPosition: 'center center',
     }
 
+     // button add 
+     const addProperty = () => {
+        var cardProp = {
+            "price": cardProperty.price,
+            "agency": {
+                "brandingColors": {
+                    "primary": cardProperty.agency.brandingColors.primary
+                },
+                "logo": cardProperty.agency.logo
+            },
+            "id": cardProperty.id,
+            "mainImage": cardProperty.mainImage
+        }
+        addREProperty(cardProp) //callback of parent
+    }
+
+    const onClick = e => {
+        if (addREProperty) {
+            addProperty()
+        } 
+    }
+
     return (
         <div className="propertyCardStyles" >
             <div id='backgrndColor' className="card-backgroundColor-header" style={HeaderBackgroundColorStyle}>
                 <img src={cardProperty.agency.logo} className="card-logo" alt="logo" />
             </div>
-            <div id='backgrndImg' style={MainImgStyle} ></div>
+            <div id='backgrndImg' style={MainImgStyle} >
+               <div className="button"><a onClick={onClick} style={ButtonAStyle} href="#/"> {Button} </a></div>
+           </div>
             <div style={{ borderTopStyle: 'solid' }}>
                 <span style={{ marginLeft: '5px', float: 'left' }}>
                     Price

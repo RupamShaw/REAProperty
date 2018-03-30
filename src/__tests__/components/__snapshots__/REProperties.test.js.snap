@@ -80,6 +80,7 @@ ShallowWrapper {
                     className="propertyListStyles"
           >
                     <REProperty
+                              addREProperty={[Function]}
                               cardProperty={
                                         Object {
                                                   "agency": Object {
@@ -95,6 +96,7 @@ ShallowWrapper {
                               }
                     />
                     <REProperty
+                              addREProperty={[Function]}
                               cardProperty={
                                         Object {
                                                   "agency": Object {
@@ -110,6 +112,7 @@ ShallowWrapper {
                               }
                     />
                     <REProperty
+                              addREProperty={[Function]}
                               cardProperty={
                                         Object {
                                                   "agency": Object {
@@ -167,6 +170,7 @@ ShallowWrapper {
               className="propertyListStyles"
 >
               <REProperty
+                            addREProperty={[Function]}
                             cardProperty={
                                           Object {
                                                         "agency": Object {
@@ -182,6 +186,7 @@ ShallowWrapper {
                             }
               />
               <REProperty
+                            addREProperty={[Function]}
                             cardProperty={
                                           Object {
                                                         "agency": Object {
@@ -197,6 +202,7 @@ ShallowWrapper {
                             }
               />
               <REProperty
+                            addREProperty={[Function]}
                             cardProperty={
                                           Object {
                                                         "agency": Object {
@@ -226,6 +232,7 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <REProperty
+                  addREProperty={[Function]}
                   cardProperty={
                                     Object {
                                                       "agency": Object {
@@ -241,6 +248,7 @@ ShallowWrapper {
                   }
 />,
                 <REProperty
+                  addREProperty={[Function]}
                   cardProperty={
                                     Object {
                                                       "agency": Object {
@@ -256,6 +264,7 @@ ShallowWrapper {
                   }
 />,
                 <REProperty
+                  addREProperty={[Function]}
                   cardProperty={
                                     Object {
                                                       "agency": Object {
@@ -280,6 +289,7 @@ ShallowWrapper {
                 "key": "1",
                 "nodeType": "function",
                 "props": Object {
+                  "addREProperty": [Function],
                   "cardProperty": Object {
                     "agency": Object {
                       "brandingColors": Object {
@@ -301,6 +311,7 @@ ShallowWrapper {
                 "key": "2",
                 "nodeType": "function",
                 "props": Object {
+                  "addREProperty": [Function],
                   "cardProperty": Object {
                     "agency": Object {
                       "brandingColors": Object {
@@ -322,6 +333,7 @@ ShallowWrapper {
                 "key": "3",
                 "nodeType": "function",
                 "props": Object {
+                  "addREProperty": [Function],
                   "cardProperty": Object {
                     "agency": Object {
                       "brandingColors": Object {
@@ -449,6 +461,7 @@ ShallowWrapper {
                         className="propertyListStyles"
             >
                         <REProperty
+                                    addREProperty={[Function]}
                                     cardProperty={
                                                 Object {
                                                             "agency": Object {
@@ -464,6 +477,7 @@ ShallowWrapper {
                                     }
                         />
                         <REProperty
+                                    addREProperty={[Function]}
                                     cardProperty={
                                                 Object {
                                                             "agency": Object {
@@ -479,6 +493,7 @@ ShallowWrapper {
                                     }
                         />
                         <REProperty
+                                    addREProperty={[Function]}
                                     cardProperty={
                                                 Object {
                                                             "agency": Object {
@@ -536,6 +551,7 @@ ShallowWrapper {
                 className="propertyListStyles"
 >
                 <REProperty
+                                addREProperty={[Function]}
                                 cardProperty={
                                                 Object {
                                                                 "agency": Object {
@@ -551,6 +567,7 @@ ShallowWrapper {
                                 }
                 />
                 <REProperty
+                                addREProperty={[Function]}
                                 cardProperty={
                                                 Object {
                                                                 "agency": Object {
@@ -566,6 +583,7 @@ ShallowWrapper {
                                 }
                 />
                 <REProperty
+                                addREProperty={[Function]}
                                 cardProperty={
                                                 Object {
                                                                 "agency": Object {
@@ -595,6 +613,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <REProperty
+                    addREProperty={[Function]}
                     cardProperty={
                                         Object {
                                                             "agency": Object {
@@ -610,6 +629,7 @@ ShallowWrapper {
                     }
 />,
                   <REProperty
+                    addREProperty={[Function]}
                     cardProperty={
                                         Object {
                                                             "agency": Object {
@@ -625,6 +645,7 @@ ShallowWrapper {
                     }
 />,
                   <REProperty
+                    addREProperty={[Function]}
                     cardProperty={
                                         Object {
                                                             "agency": Object {
@@ -649,6 +670,7 @@ ShallowWrapper {
                   "key": "1",
                   "nodeType": "function",
                   "props": Object {
+                    "addREProperty": [Function],
                     "cardProperty": Object {
                       "agency": Object {
                         "brandingColors": Object {
@@ -670,6 +692,7 @@ ShallowWrapper {
                   "key": "2",
                   "nodeType": "function",
                   "props": Object {
+                    "addREProperty": [Function],
                     "cardProperty": Object {
                       "agency": Object {
                         "brandingColors": Object {
@@ -691,6 +714,7 @@ ShallowWrapper {
                   "key": "3",
                   "nodeType": "function",
                   "props": Object {
+                    "addREProperty": [Function],
                     "cardProperty": Object {
                       "agency": Object {
                         "brandingColors": Object {

@@ -28,4 +28,5 @@ Redux
 7. Test REProperties  for  connect and REProperties single tag and its initial properties
 
  
-
+Add property 
+REProperties and REProperty changed and test

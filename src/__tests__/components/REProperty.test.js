@@ -2,9 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import REProperty from '../../components/REProperty';
 import { shallow, mount, configure } from 'enzyme';
-import { REProperties }  from '../../components/REProperties';
-import {  data } from '../../datasource/fixtures.js'
+import configureStore from 'redux-mock-store'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from '../../reducers'
 
+import ConnectedProperties, { REProperties }  from '../../components/REProperties';
+import { adddata1, addCard, data, adddata } from '../../datasource/fixtures.js'
+import { addData } from '../../actions'
 //import ReactTestUtils from 'react-dom/test-utils'
 //  rule of thumbs is:
 // Always begin with shallow
@@ -15,6 +20,7 @@ import {  data } from '../../datasource/fixtures.js'
 const wrapper = shallow(<REProperty cardProperty={data.results[0]} />);
 const results = data.results
 const saved = data.saved
+const handleClickStub = jest.fn();
 
 const setupShallow = props => {
     const component = shallow(
@@ -41,8 +47,10 @@ it('REProperty renders without crashing', () => {
 });
 
 describe('renders data for results ', () => {
+    const spy = jest.fn();
     const { component } = setupmount({
-        "cardProperty": data.results[0]
+        "cardProperty": data.results[0],
+        "addREProperty": spy
      });
     const cardProp = data.results[0]
     it(' render from json data', (done) => {
@@ -70,7 +78,7 @@ describe('renders data for saved ', () => {
 
 it("no  REProperty tag if data.results is empty / initial state not set proper  ", (done) => {
     // test for false of ( saved.length > 0 && ...)
-    const wrapper3 = mount(<REProperties results={results} saved={saved}  />) // ?
+    const wrapper3 = mount(<REProperties results={results} saved={saved}   handleClick={handleClickStub}/>) // ?
     wrapper3.update()
     expect(wrapper3.find('#results REProperty').length).toEqual(3)
     expect(wrapper3.props().results.length).toEqual(3)
@@ -81,5 +89,57 @@ it("no  REProperty tag if data.results is empty / initial state not set proper  
     expect(wrapper3.find('#results REProperty').length).toEqual(0)
     expect(wrapper3.props().results.length).toEqual(0) 
     done()
+});
+
+describe('Button', () => {
+    describe('Button Text ', () => {
+        it(' button text should addProperty', (done) => {
+            const spy = jest.fn();
+            const { component } = setupShallow({
+                "cardProperty": data.results[0],
+                "addREProperty": spy
+            });
+            expect(component.find('a').text()).toEqual(" Add Property ")
+            done()
+        })
+
+    })
+    
+    describe('Button click ', () => {
+        let store, wrapper
+        beforeEach(() => {
+            store = createStore(rootReducer)
+            wrapper = mount(<Provider store={store}><ConnectedProperties /></Provider>)
+        })
+
+        it('Button clicked  addProperty', (done) => {
+            // const wrapper = mount(<REProperties items={items} handleClick={handleClickStub} />) // ?
+            expect(wrapper.find(REProperties).prop('saved').length).toEqual(1)
+
+            wrapper.find('a').first().text() // ? 
+            wrapper.find('a').first().simulate('click') // ?
+            wrapper.update()
+            expect(wrapper.find('REProperties').prop('saved').length).toEqual(2)
+            expect(wrapper.find('REProperties').prop('saved')).toEqual(adddata1.saved)
+            done()
+            wrapper.unmount(REProperties)
+        })
+
+    })
+
+})
+
+it('link Add Property test /addREProperty props should be in  <REProperty> for results', (done) => {
+    const wrapper1 = mount(<REProperties results={results} saved={saved} handleClick={handleClickStub} />) // ?
+    //console.log('wrapper1',wrapper1.debug())
+    if (results.length >= 1) { // ? 
+        const y = wrapper1.find(REProperty).first().props()// ? 
+        if ('addREProperty' in y) {
+            const anchor = wrapper1.find('a').first() //?
+            expect(anchor.text()).toEqual(' Add Property ')
+        }
+    }
+    done()
+    wrapper1.unmount(REProperties)
 });
 

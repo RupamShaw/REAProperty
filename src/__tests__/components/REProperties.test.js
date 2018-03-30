@@ -6,11 +6,13 @@ import { Provider } from 'react-redux'
 import rootReducer from '../../reducers'
 import { shallow, mount } from 'enzyme';
 
-import { data } from '../../datasource/fixtures.js'
+import { addCard, data, adddata } from '../../datasource/fixtures.js'
 import ConnectedProperties,{ REProperties }  from '../../components/REProperties';
+import { addData } from '../../actions'
 
 const results = data.results
 const saved = data.saved
+const handleClickStub = jest.fn();
 const props = { results, saved }
 const wrapper = shallow(<REProperties {...props} />)
 
@@ -66,4 +68,40 @@ describe('>>>REProperties --- REACT-REDUX (Mount + wrapping in <Provider>)', () 
         done()
     })
 
+    it('+++ check action on dispatching ', (done) => {
+       store.dispatch(addData(addCard))
+       let action = store.getActions()
+       expect(action[0].type).toBe("ADD_REA")
+       done()
+   });
+
+})
+
+describe('>>>REProperties --- REACT-REDUX (actual Store + reducers) more of Integration Testing', () => {
+    let store, wrapper
+    beforeEach(() => {
+
+        store = createStore(rootReducer)
+        wrapper = mount(<Provider store={store}><ConnectedProperties /></Provider>)
+    })
+
+    it(' check Prop matches with initialState and add flow works as expected', () => {
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(data.saved)
+        store.dispatch(addData(addCard))
+        wrapper.update()
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(adddata.saved)
+
+    });
+
+
+    it('add Property check in component  ', (done) => {
+        const reProperties = wrapper.find(REProperties)
+        let rePropertiesInstance = reProperties.instance()
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(data.saved)
+
+        rePropertiesInstance.addREProperty(addCard)
+        wrapper.update()
+        expect(rePropertiesInstance.props.saved).toEqual(adddata.saved)
+        done()
+    })
 })

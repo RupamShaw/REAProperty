@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import REProperty from './REProperty'
 import '../styles/REProperties.css'
-import { connect } from 'react-redux'
+import { addData } from '../actions'
 
 const AdminContact = () =>{
     return(
@@ -11,6 +13,11 @@ const AdminContact = () =>{
 }
 
 export  class REProperties extends Component {
+
+    addREProperty = (cardProp) => {
+        this.props.addData(cardProp)
+    }
+
     render() {
         const results = this.props.results
         const saved = this.props.saved
@@ -26,6 +33,7 @@ export  class REProperties extends Component {
                                         <REProperty 
                                             key={resultObject.id} 
                                             cardProperty={resultObject}
+                                            addREProperty={this.addREProperty} 
                                         />
                                     )
                                 })}
@@ -69,6 +77,6 @@ REProperties.propTypes = {
 
 export default connect(
     mapStateToProps,
-    null
+    { addData }
 )(REProperties)
 
