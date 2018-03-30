@@ -5,17 +5,22 @@ import '../styles/REProperty.css'
 const REProperty = (props) => {
     var cardProperty = props.cardProperty 
     var addREProperty = props.addREProperty 
+    var removeREProperty = props.removeREProperty
     
      //dynamic style for button 
-     var Button = ''
-     var selectedPropertyColor = ''
-     var backgroundColor = ''
+     var Button = 'test'
+     var selectedPropertyColor = 'blue'
+     var backgroundColor = 'lightblue'
  
      if (addREProperty) {
          Button = 'Add Property'
          selectedPropertyColor = 'green'
          backgroundColor = 'lightgreen'
-     }
+     }else if (removeREProperty) {
+        Button = 'Remove Property'
+        selectedPropertyColor = 'red'
+        backgroundColor = 'pink'
+    }
 
      const ButtonAStyle = {
         color: selectedPropertyColor,
@@ -54,10 +59,16 @@ const REProperty = (props) => {
         addREProperty(cardProp) //callback of parent
     }
 
+    const removeProperty = () => {
+        removeREProperty(cardProperty.id)
+    }
+
     const onClick = e => {
         if (addREProperty) {
             addProperty()
-        } 
+        } else if (removeREProperty) {
+            removeProperty()
+        }
     }
 
     return (

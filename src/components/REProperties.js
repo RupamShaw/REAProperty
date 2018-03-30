@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import REProperty from './REProperty'
 import '../styles/REProperties.css'
-import { addData } from '../actions'
+import { addData, removeData } from '../actions'
 
 const AdminContact = () =>{
     return(
@@ -16,6 +16,14 @@ export  class REProperties extends Component {
 
     addREProperty = (cardProp) => {
         this.props.addData(cardProp)
+    }
+
+    removeREProperty = (id) => {
+        if (typeof id === 'string') {
+            this.props.removeData(id)
+        } else {
+            console.log('id is number Please check Json for id   ')
+        }
     }
 
     render() {
@@ -49,6 +57,7 @@ export  class REProperties extends Component {
                                             <REProperty 
                                                 key={resultsLength}
                                                 cardProperty={savedObject}
+                                                removeREProperty={this.removeREProperty}                                            
                                             />
                                         )
                                     })}
@@ -77,6 +86,6 @@ REProperties.propTypes = {
 
 export default connect(
     mapStateToProps,
-    { addData }
+    { addData, removeData }
 )(REProperties)
 

@@ -29,4 +29,10 @@ Redux
 
  
 Add property 
+action and reducers for add property tested
 REProperties and REProperty changed and test
+
+Remove Property
+action and reducers for remove property tested
+REProperties and REProperty changed and test
+

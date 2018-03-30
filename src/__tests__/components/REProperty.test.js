@@ -9,7 +9,7 @@ import rootReducer from '../../reducers'
 
 import ConnectedProperties, { REProperties }  from '../../components/REProperties';
 import { adddata1, addCard, data, adddata } from '../../datasource/fixtures.js'
-import { addData } from '../../actions'
+import { addData, removeData } from '../../actions'
 //import ReactTestUtils from 'react-dom/test-utils'
 //  rule of thumbs is:
 // Always begin with shallow
@@ -63,8 +63,10 @@ describe('renders data for results ', () => {
 })
 
 describe('renders data for saved ', () => {
+    const spy = jest.fn();
     const { component } = setupmount({
-        "cardProperty": data.saved[0]
+        "cardProperty": data.saved[0],
+        "removeREProperty": spy
      });
     const cardProp = data.saved[0]
     it(' render from json data', (done) => {
@@ -103,6 +105,26 @@ describe('Button', () => {
             done()
         })
 
+        it(' button text should removeProperty', (done) => {
+            const spy = jest.fn();
+            const { component } = setupShallow({
+                "cardProperty": data.saved[0],
+                "removeREProperty": spy
+            });
+            expect(component.find('a').last().text()).toEqual(" Remove Property ")
+            done()
+        })
+
+        it(' fake button neither add nor remove then button text should be test', (done) => {
+            const spy = jest.fn();
+            const { component } = setupShallow({
+                "cardProperty": data.results[0],
+                "aaremoveREProperty": spy
+            });
+            expect(component.find('a').text()).toEqual(" test ")
+            done()
+        })
+
     })
     
     describe('Button click ', () => {
@@ -124,7 +146,18 @@ describe('Button', () => {
             done()
             wrapper.unmount(REProperties)
         })
-
+        
+        it('Button clicked  removedProperty', (done) => {
+            //  const wrapper = mount(<REProperties results={results} saved={saved} handleClick={handleClickStub} />) // ?
+            //  console.log(wrapper.debug())
+            //     console.log('wrapper props',wrapper.props().saved)
+            expect(wrapper.find(REProperties).prop('saved').length).toEqual(1);
+            wrapper.find('a').last().simulate('click') // ?
+            wrapper.update()
+            expect(wrapper.find(REProperties).prop('saved').length).toEqual(0)
+            wrapper.unmount(REProperties)
+            done()
+        });
     })
 
 })
@@ -143,3 +176,36 @@ it('link Add Property test /addREProperty props should be in  <REProperty> for r
     wrapper1.unmount(REProperties)
 });
 
+it('link Remove Property test /removeREProperty props should be in  REProperty for saved', (done) => {
+    const wrapper1 = mount(<REProperties results={results} saved={saved} handleClick={handleClickStub} />) // ?
+    //can be done by find('#saved REProperty')
+    if (saved.length >= 1) {
+        const y = wrapper1.find(REProperty).last().props()// ?
+        if ('removeREProperty' in y) {
+            const anchor = wrapper1.find('a').last() // ?
+            expect(anchor.text()).toEqual(' Remove Property ')
+        }
+    }
+    wrapper1.unmount(REProperties)
+    done()
+});
+
+it("savedcard is empty  REProperty  shouldn't be there", (done) => {
+    // test for false of ( saved.length > 0 && ...)
+    const items1 = { saved: [] }
+    // items1
+    const wrapper3 = mount(<REProperties results={results} saved={items1.saved} handleClick={handleClickStub} />) // ?
+    const len = wrapper3.props().saved.length // ?  
+    wrapper3.update()
+    const y = wrapper3.find(REProperty).last().props()// ?
+    //can be done by find('#saved REProperty')
+    if (len === 0) {
+        //     //test for no removeREProperty in y  
+        if ('removeREProperty' in y) {
+            const anchor = wrapper3.find('a').last() // ?
+            expect(anchor.text()).toEqual(' Remove Property ') // ? anchor.text()
+        }
+    }
+    done()
+    wrapper3.unmount(REProperties)
+});

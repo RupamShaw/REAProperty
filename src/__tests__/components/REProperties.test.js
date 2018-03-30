@@ -8,7 +8,8 @@ import { shallow, mount } from 'enzyme';
 
 import { addCard, data, adddata } from '../../datasource/fixtures.js'
 import ConnectedProperties,{ REProperties }  from '../../components/REProperties';
-import { addData } from '../../actions'
+import { addData, removeData } from '../../actions'
+import REProperty from '../../components/REProperty';
 
 const results = data.results
 const saved = data.saved
@@ -68,10 +69,12 @@ describe('>>>REProperties --- REACT-REDUX (Mount + wrapping in <Provider>)', () 
         done()
     })
 
-    it('+++ check action on dispatching ', (done) => {
+    it('check action on dispatching ', (done) => {
        store.dispatch(addData(addCard))
+       store.dispatch(removeData("3"))
        let action = store.getActions()
        expect(action[0].type).toBe("ADD_REA")
+       expect(action[1].type).toBe("REMOVE_REA")
        done()
    });
 
@@ -85,11 +88,15 @@ describe('>>>REProperties --- REACT-REDUX (actual Store + reducers) more of Inte
         wrapper = mount(<Provider store={store}><ConnectedProperties /></Provider>)
     })
 
-    it(' check Prop matches with initialState and add flow works as expected', () => {
+    it(' check Prop matches with initialState and add and remove flow works as expected', () => {
         expect(wrapper.find(REProperties).prop('saved')).toEqual(data.saved)
         store.dispatch(addData(addCard))
         wrapper.update()
         expect(wrapper.find(REProperties).prop('saved')).toEqual(adddata.saved)
+        
+        store.dispatch(removeData("3"))
+        wrapper.update()
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(data.saved)
 
     });
 
@@ -104,4 +111,34 @@ describe('>>>REProperties --- REACT-REDUX (actual Store + reducers) more of Inte
         expect(rePropertiesInstance.props.saved).toEqual(adddata.saved)
         done()
     })
+
+    it('remove Property  id is not string ', (done) => {
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(data.saved)
+        store.dispatch(addData(addCard))
+        wrapper.update()
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(adddata.saved)
+
+        const reProperties = wrapper.find(REProperties)
+
+        let rePropertiesInstance = reProperties.instance()
+        rePropertiesInstance.removeREProperty(3)
+       //   reProperties.removeREProperty(3)
+       expect(wrapper.find(REProperties).prop('saved')).toEqual(adddata.saved) // no change
+        done()
+    })
+    it('remove Property check in component  ', (done) => {
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(data.saved)
+        store.dispatch(addData(addCard))
+        wrapper.update()
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(adddata.saved)
+  
+        const reProperties = wrapper.find(REProperties)
+        let rePropertiesInstance = reProperties.instance()
+        rePropertiesInstance.removeREProperty("3")
+        wrapper.update()
+        expect(wrapper.find(REProperties).prop('saved')).toEqual(data.saved) // no change
+  
+        done()
+    })
+
 })
