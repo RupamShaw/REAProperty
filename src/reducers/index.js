@@ -1,4 +1,4 @@
-import { SET_REA, ADD_REA } from '../actions'
+import { SET_REA, ADD_REA, REMOVE_REA } from '../actions'
 import data from '../datasource/data.json'
 
 function reaData(state = data, action) {
@@ -29,6 +29,14 @@ function reaData(state = data, action) {
             //  else
             //     return state
             break
+
+        case REMOVE_REA:
+            if (Object.keys(state).length === 2) {
+                return { ...state, saved: state.saved.filter(
+                    item => item.id !== action.removeProperty) 
+                }
+            }
+            break    
 
         default:
             return state

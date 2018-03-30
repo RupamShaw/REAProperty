@@ -39,3 +39,9 @@ describe('add Property ',() =>{
     })
    
 })
+
+describe('remove Property',() => {
+    it('remove a property',() =>{
+        expect(rootReducer(adddata1,{ type: actions.REMOVE_REA, removeProperty : adddata1.saved[1].id})).toEqual(data)
+    })
+})
