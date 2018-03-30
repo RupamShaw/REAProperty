@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import REProperty from '../../components/REProperty';
 import { shallow, mount, configure } from 'enzyme';
-import REProperties  from '../../components/REProperties';
+import { REProperties }  from '../../components/REProperties';
 import {  data } from '../../datasource/fixtures.js'
 
 //import ReactTestUtils from 'react-dom/test-utils'
@@ -68,7 +68,7 @@ describe('renders data for saved ', () => {
     })
 })
 
-it("no  REProperty tag if addcard is empty / initial state not set proper  ", (done) => {
+it("no  REProperty tag if data.results is empty / initial state not set proper  ", (done) => {
     // test for false of ( saved.length > 0 && ...)
     const wrapper3 = mount(<REProperties results={results} saved={saved}  />) // ?
     wrapper3.update()

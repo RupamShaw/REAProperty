@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import  REProperties  from '../../components/REProperties';
+import ConnectedProperties,{ REProperties }  from '../../components/REProperties';
 import { shallow, mount } from 'enzyme';
 import { data } from '../../datasource/fixtures.js'
 
@@ -10,6 +10,10 @@ const props = { results, saved }
 const wrapper = shallow(<REProperties {...props} />)
 
 describe('>>>REProperties Initial rendered testing', () => {
+    it('REProperties renders correctly', () => {
+        expect(wrapper).toMatchSnapshot() //?
+    });
+
     it('Should render successfully', () => {
         expect(wrapper.exists()).toBe(true)
     });

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import REProperty from './REProperty'
 import '../styles/REProperties.css'
+import { connect } from 'react-redux'
 
 const AdminContact = () =>{
     return(
@@ -9,7 +10,7 @@ const AdminContact = () =>{
     )
 }
 
-export default class REProperties extends Component {
+export  class REProperties extends Component {
     render() {
         const results = this.props.results
         const saved = this.props.saved
@@ -54,7 +55,20 @@ export default class REProperties extends Component {
         }
     }
 }
+const mapStateToProps = state => {
+    return {
+        results: state.results,
+        saved: state.saved
+    }
+}
+
 REProperties.propTypes = {
     results: PropTypes.array.isRequired,
     saved:PropTypes.array
 }
+
+export default connect(
+    mapStateToProps,
+    null
+)(REProperties)
+
